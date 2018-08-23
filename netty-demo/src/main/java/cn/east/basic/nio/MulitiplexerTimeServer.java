@@ -53,11 +53,11 @@ public class MulitiplexerTimeServer implements Runnable{
 		while (!stop) {
 			try {
 				selector.select(1000);
-				Set<SelectionKey> selectedKeys = selector.selectedKeys();
+                Set<SelectionKey> selectedKeys = selector.selectedKeys();
 				Iterator<SelectionKey> it =selectedKeys.iterator();
 				SelectionKey key =null;
-				while (it.hasNext()) {
-					key =it .next();
+                while (it.hasNext()) {
+					key =it.next();
 					it.remove();
 					try {
 						handleInput(key);
@@ -94,7 +94,7 @@ public class MulitiplexerTimeServer implements Runnable{
 				SocketChannel sc=ssc.accept();
 				sc.configureBlocking(false);
 				//Add the new connection to the selector
-				sc.register(selector, SelectionKey.OP_ACCEPT);
+				sc.register(selector, SelectionKey.OP_READ);
 			}
 			
 			if(key.isReadable()){

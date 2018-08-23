@@ -1,7 +1,5 @@
 package cn.east.basic.nio;
 
-import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
@@ -82,7 +80,7 @@ public class TimeClientHandle implements Runnable {
 	}
 
 	private void handleInput(SelectionKey key) throws IOException{
-		if(key.isValid()){
+        if(key.isValid()){
 		    //判断是否连接成功
 		    SocketChannel sc = (SocketChannel) key.channel();
 		    if(key.isConnectable()){
@@ -93,24 +91,24 @@ public class TimeClientHandle implements Runnable {
 		            //连接失败，进程退出
 		            System.exit(1);
                 }
+            }
 
-                if(key.isReadable()){
-                    ByteBuffer readBuffer = ByteBuffer.allocate(1024);
-                    int readBytes = sc.read(readBuffer);
-                    if(readBytes>0){
-                        readBuffer.flip();
-                        byte[] bytes = new byte[readBuffer.remaining()];
-                        readBuffer.get(bytes);
-                        String body = new String(bytes,"UTF-8");
-                        System.out.println("Now is : "+body);
-                        stop();
-                    }else if(readBytes<0){
-                        //对端链路关闭
-                        key.cancel();
-                        sc.close();
-                    }else {
-                        //读到0字节，忽略
-                    }
+            if(key.isReadable()){
+                ByteBuffer readBuffer = ByteBuffer.allocate(1024);
+                int readBytes = sc.read(readBuffer);
+                if(readBytes>0){
+                    readBuffer.flip();
+                    byte[] bytes = new byte[readBuffer.remaining()];
+                    readBuffer.get(bytes);
+                    String body = new String(bytes,"UTF-8");
+                    System.out.println("Now is : "+body);
+                    stop();
+                }else if(readBytes<0){
+                    //对端链路关闭
+                    key.cancel();
+                    sc.close();
+                }else {
+                    //读到0字节，忽略
                 }
             }
         }

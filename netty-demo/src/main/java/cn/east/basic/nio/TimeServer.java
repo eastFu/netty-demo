@@ -15,7 +15,7 @@ public class TimeServer {
 			try {
 				port=Integer.parseInt(args[0]);
 			} catch (Exception e) {
-				// TODO: handle exception
+				e.printStackTrace();
 			}
 		}
 		MulitiplexerTimeServer timeServer =new MulitiplexerTimeServer(port);
