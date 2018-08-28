@@ -40,6 +40,7 @@
 * 应用程序write写入的字节大小大于套接口发送缓冲区大小
 * 进行MSS大小的TCP字段
 * 以太网帧的payload大于MTU进行IP分片
+
 ![TCP粘包/拆包问题原因](https://raw.github.com/eastFu/docs/master/netty-docs/3-2.png)
 
 ##### 2. 如何解决
