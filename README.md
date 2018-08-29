@@ -99,4 +99,11 @@ Netty还提供了多种编解码器来应对各种场景。
     }
 
 
+## 五. 编解码技术
+
+
+## 六. Google Protobuf解码器
+
+
+## 七. JBoss Marshalling解码器
 
