@@ -73,3 +73,30 @@ Netty还提供了多种编解码器来应对各种场景。
 　　 MessageToMessageEncoder 根据 消息对象 编码为消息对象
 
 ## 四. 分隔符和定长解码器的应用
+
+
+##### DelimiterBasedFrameDecoder
+
+按照分隔符实现的解码器
+
+	@Override
+    protected void initChannel(SocketChannel socketChannel) throws Exception {
+    	ByteBuf delimiter = Unpooled.copiedBuffer("$_".getBytes());
+        socketChannel.pipeline().addLast(new DelimiterBasedFrameDecoder(1024,delimiter));
+        socketChannel.pipeline().addLast(new StringDecoder());
+        socketChannel.pipeline().addLast(new EchoServerHandler());
+    }
+
+##### FixedLengthFrameDecoder
+
+按照固定长度实现的解码器
+
+	@Override
+    protected void initChannel(SocketChannel socketChannel) throws Exception {
+        socketChannel.pipeline().addLast(new FixedLengthFrameDecoder(10));
+        socketChannel.pipeline().addLast(new StringDecoder());
+        socketChannel.pipeline().addLast(new EchoServerHandler());
+    }
+
+
+
