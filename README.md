@@ -62,16 +62,23 @@ Netty还提供了多种编解码器来应对各种场景。
 * netty 提供的解码器
 
     DelimiterBasedFrameDecoder 解决TCP的粘包解码器
-	StringDecoder              消息转成String解码器
-	LineBasedFrameDecoder      自动完成标识符分隔解码器
+
+    StringDecoder              消息转成String解码器
+
+    LineBasedFrameDecoder      自动完成标识符分隔解码器
+
 	FixedLengthFrameDecoder    固定长度解码器，二进制
+
 	Base64Decoder base64       解码器
 
 * netty 提供的编码器
 
 	Base64Encoder  base64编码器
+
 	StringEncoder  消息转成String编码器
+
 	LineBasedFrameDecoder  自动完成标识符分隔编码器
+
 	MessageToMessageEncoder 根据 消息对象 编码为消息对象
 
 ## 四. 分隔符和定长解码器的应用
