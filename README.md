@@ -60,17 +60,19 @@ Netty还提供了多种编解码器来应对各种场景。
 
 
 * netty 提供的解码器
-　　 DelimiterBasedFrameDecoder 解决TCP的粘包解码器
-　　 StringDecoder              消息转成String解码器
-　　 LineBasedFrameDecoder      自动完成标识符分隔解码器
-　　 FixedLengthFrameDecoder    固定长度解码器，二进制
-　　 Base64Decoder base64       解码器
+
+    DelimiterBasedFrameDecoder 解决TCP的粘包解码器
+	StringDecoder              消息转成String解码器
+	LineBasedFrameDecoder      自动完成标识符分隔解码器
+	FixedLengthFrameDecoder    固定长度解码器，二进制
+	Base64Decoder base64       解码器
 
 * netty 提供的编码器
-　　 Base64Encoder  base64编码器
-　　 StringEncoder  消息转成String编码器
-　　 LineBasedFrameDecoder  自动完成标识符分隔编码器
-　　 MessageToMessageEncoder 根据 消息对象 编码为消息对象
+
+	Base64Encoder  base64编码器
+	StringEncoder  消息转成String编码器
+	LineBasedFrameDecoder  自动完成标识符分隔编码器
+	MessageToMessageEncoder 根据 消息对象 编码为消息对象
 
 ## 四. 分隔符和定长解码器的应用
 
@@ -100,6 +102,34 @@ Netty还提供了多种编解码器来应对各种场景。
 
 
 ## 五. 编解码技术
+
+* JAVA序列化的目的主要有两个：
+	1.网络传输
+	2.对象持久化
+
+* 什么是Java对象的编解码技术？
+
+	对于网络传输而言，当进行远程跨进程服务调用时，需要把被传输的java对象编码为字节数组或者ByteBuffer对象。而当远程服务读取到ByteBuffer对象或者字节数组时，需要将其解码为发送时的java对象。这就是java对象的编解码技术。
+
+* java序列化
+
+    用来实现序列化的类都在java.io包中，我们常用的类或接口有：
+
+	ObjectOutputStream:提供序列化对象并把其写入流的方法
+
+	ObjectInputStream：读取流并反序列化对象
+
+	Serializable：一个对象想要被序列化，那么它的类就要实现 此接口，这个对象的所有属性（包括private属性、包括其引用的对象）都可以被序列化和反序列化来保存、传递。
+
+	Externalizable：他是Serializable接口的子类，有时我们不希望序列化那么多，可以使用这个接口，这个接口的writeExternal()和readExternal()方法可以指定序列化哪些属性;
+
+	但是如果你只想隐藏一个属性，比如用户对象user的密码pwd，如果使用Externalizable，并除了pwd之外的每个属性都写在writeExternal()方法里，这样显得麻烦，可以使用Serializable接口，并在要隐藏的属性pwd前面加上transient就可以实现了
+
+* java序列化的缺点
+
+	1.无法跨语言：java的序列化技术是java语言内部的私有协议，其他语言并不支持，对于用户来说它完全是黑盒。对于java序列化后的字节数组，别的语言无法进行反序列化，这就严重阻碍它的使用。在远程服务调用（RPC）时，目前流行的RPC通讯框架，都没有使用或直接使用JAVA序列化作为编解码框架，因为它无法跨语言。
+	2.序列化后的码流太大
+	3.序列化性能太低
 
 
 ## 六. Google Protobuf解码器
