@@ -138,10 +138,18 @@ Netty还提供了多种编解码器来应对各种场景。
 	2.序列化后的码流太大
 	3.序列化性能太低
 
+## 六. MessagePack 编解码
+	<!-- https://mvnrepository.com/artifact/org.msgpack/msgpack -->
+    <dependency>
+        <groupId>org.msgpack</groupId>
+        <artifactId>msgpack</artifactId>
+        <version>0.6.12</version>
+    </dependency>
 
-## 六. Google Protobuf解码器
+
+## 七. Google Protobuf解码器
 
 
 
-## 七. JBoss Marshalling解码器
+## 八. JBoss Marshalling解码器
 
