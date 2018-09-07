@@ -139,6 +139,8 @@ Netty还提供了多种编解码器来应对各种场景。
 	3.序列化性能太低
 
 ## 六. MessagePack 编解码
+messagepack maven配置：
+
 	<!-- https://mvnrepository.com/artifact/org.msgpack/msgpack -->
     <dependency>
         <groupId>org.msgpack</groupId>
@@ -146,10 +148,37 @@ Netty还提供了多种编解码器来应对各种场景。
         <version>0.6.12</version>
     </dependency>
 
+注：使用MessagePack 开发的编解码只是用于解决对象的持久化传输问题，关于半包读写的问题还要借助Netty提供的类配合使用。
 
 ## 七. Google Protobuf解码器
 
+* protobuf maven配置：
 
+        <!-- https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java -->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.5.1</version>
+        </dependency>
+
+* 事例文件 SubstribeReq.proto:
+
+		package netty;
+        option java_package ="per.east.netty.protobuf";
+        option java_outer_classname="SubStribeReqProto";
+
+        message SubstribeReq{
+            required int32 subReqId = 1;
+            required string userName = 2;
+            required string productName = 3;
+            required string address = 4;
+        }
+* 文档地址：
+
+		protobuf 官方指南：
+		https://developers.google.com/protocol-buffers
+		github 地址：
+        https://github.com/protocolbuffers/protobuf.git
 
 ## 八. JBoss Marshalling解码器
 
