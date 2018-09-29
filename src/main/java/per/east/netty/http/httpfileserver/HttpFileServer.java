@@ -1,4 +1,4 @@
-package per.east.netty.http;
+package per.east.netty.http.httpfileserver;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
